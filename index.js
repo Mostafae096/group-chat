@@ -68,7 +68,9 @@ const rooms = new Map(); // roomId => { router, peers }
         return callback({ error: 'Peer not found in room' });
       }
       const transport = await room.router.createWebRtcTransport({
-        listenIps: [{ ip: '127.0.0.1', announcedIp: null }],
+        listenIps: [
+          { ip: '0.0.0.0', announcedIp: 'https://group-chat-production-6656.up.railway.app/' }
+        ],
         enableUdp: true,
         enableTcp: true,
         preferUdp: true
