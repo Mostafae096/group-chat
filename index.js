@@ -76,7 +76,7 @@ const rooms = new Map(); // roomId => { router, peers }
       }
       const transport = await room.router.createWebRtcTransport({
         listenIps: [
-          { ip: '0.0.0.0', announcedIp: 'group-chat-production-6656.up.railway.app' }
+          { ip: '0.0.0.0', announcedIp: '139.162.164.202' } // <-- use your public IP
         ],
         enableUdp: true,
         enableTcp: true,
