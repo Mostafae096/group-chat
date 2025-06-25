@@ -15,7 +15,7 @@ const server = https.createServer(
 );
 const io = socketIO(server, {
   cors: {
-    origin: true,
+    origin: '*',
     methods: ['GET', 'POST'],
     credentials: true
   }
