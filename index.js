@@ -102,7 +102,14 @@ const rooms = new Map(); // roomId => { router, peers }
     socket.on('connectTransport', async ({ transportId, dtlsParameters, roomId }) => {
       const peer = rooms.get(roomId)?.peers.get(socket.id);
       const transport = peer?.transports.find((t) => t.id === transportId);
-      if (transport) await transport.connect({ dtlsParameters });
+      if (transport) {
+        try {
+          await transport.connect({ dtlsParameters });
+          console.log(`Transport ${transportId} connected for peer ${socket.id}`);
+        } catch (err) {
+          console.error(`Failed to connect transport:`, err);
+        }
+      }
     });
 
     socket.on('produce', async ({ transportId, kind, rtpParameters, roomId }, callback) => {
