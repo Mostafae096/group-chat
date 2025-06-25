@@ -1,11 +1,18 @@
+const fs = require('fs');
+const https = require('https');
 const express = require('express');
-const http = require('http');
 const socketIO = require('socket.io');
 const mediasoup = require('mediasoup');
 const cors = require('cors');
 
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(
+  {
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert'),
+  },
+  app
+);
 const io = socketIO(server, {
   cors: {
     origin: true,
